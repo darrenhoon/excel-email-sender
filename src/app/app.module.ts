@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { HelloComponent } from './hello.component';
+import { SheetJSComponent } from './app-sheet/sheet.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports:      [ BrowserModule, FormsModule, HttpClientModule, ],
+  declarations: [ AppComponent, HelloComponent, SheetJSComponent ],
+  bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
