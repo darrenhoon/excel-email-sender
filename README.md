@@ -37,5 +37,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * npm install --save mongoose
 * npm install --save nodemailer
 * npm install --save handlebars
+* npm install --save debug
 * npm install --save fs
 * npm install --save cors
