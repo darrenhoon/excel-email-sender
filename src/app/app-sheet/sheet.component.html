@@ -7,21 +7,25 @@
     <p>This website does not handle fringe cases because it is expected that the user <i>(a handful of people)</i> to be able to <b>follow the instructions as mentioned below</b>.</p>
   </div>
 
-  <div class="input-selector-block">
-    <p class="file-select-locator"> <b>▽</b> choose your file HERE!!!!!</p>
-    <input type="file" (change)="onFileChange($event)" multiple="false" />
+  <div class="table-container">
     <p *ngIf="showExample"> Below is an example of how the layout should be in excel</p>
+    <table class="sjs-table">
+      <tbody>
+        <tr *ngFor="let row of data">
+        <td *ngFor="let val of row">
+          {{val}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
-	<table class="sjs-table">
-		<tbody>
-      <tr *ngFor="let row of data">
-			<td *ngFor="let val of row">
-				{{val}}
-			</td>
-		</tr>
-    </tbody>
-	</table>
+  <div class="input-selector-block">
+    <p class="file-select-locator"> <b>▽</b> choose your file HERE!!!!!</p>
+    <input type="file" (change)="onFileChange($event)" multiple="false"/>
+  </div>
+
+
   <!--
 	<button (click)="export()">Export!</button>
   -->
@@ -31,5 +35,5 @@
 
 <footer>
   <p>If you enjoy this, do consider buying me a good cup of coffee from
-    <a href="https://arabica.coffee/en/locations/singapore/singapore/" target="_blank">% Arabica</a> ☕ (Cold Spanish Latte) please :')</p>
+    <a href="https://arabica.coffee/en/locations/singapore/singapore/" target="_blank">% Arabica</a>, preferrably Cold Spanish Latte please 😙</p>
 </footer>
