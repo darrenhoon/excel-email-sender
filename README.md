@@ -26,6 +26,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Dependencies
+* Install [NodeJS](https://nodejs.org/en/)
+* Install your latest Angular using the [Angular CLI Installation Guide](https://angular.io/guide/setup-local)
 * npm install --save nodemon
 * npm install --save xlsx
 * npm install --save express
