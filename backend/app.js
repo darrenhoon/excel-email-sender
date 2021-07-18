@@ -1,7 +1,8 @@
 const { urlencoded } = require('body-parser');
 const bodyParser = require('body-parser');
 const express = require('express');
-var cors = require('cors')
+var cors = require('cors');
+const path = require("path");
 
 const emailRoutes = require('./routes/emails');
 
@@ -23,7 +24,7 @@ app.use(bodyParser.json());
 app.use(urlencoded({extended: false}));
 
 
-//for deployment in heroku. might have to comment out for AWS though. see how.
+//for deployment in heroku.
 app.use("/", express.static(path.join(__dirname, "../dist/emailApp")));
 
 app.use((req, res, next) => {
