@@ -22,6 +22,14 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(urlencoded({extended: false}));
 
+
+//for deployment in heroku. might have to comment out for AWS though. see how.
+app.use("/", express.static(path.join(__dirname, "../dist/emailApp")));
+
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "../dist/emailApp/index.html"));
+});
+
 app.use('/api/emails', emailRoutes);
 
 module.exports = app;
