@@ -6,12 +6,33 @@ const path = require("path");
 
 exports.requestPayment = (req, res, next) => {
 
+  console.log("All rows are here: ");
+  console.log(req.body);
+
+  for (let i = 0; i < req.body.length; i++) {
+    if (i === 0) { continue; }
+
+    let data = req.body[i];
+
+    if (data[6] === "paid") {
+      console.log("This has not been approved yet:");
+      console.log(data);
+      requestPaymentEmail(data);
+    } else {
+      continue;
+    }
+  }
+
+  res.status(201).json({
+        message: "confirmation emails sent successfully! Pending admin approval",
+      });
+
 };
 
 exports.sendConfirmation = (req, res, next) => {
 
-  console.log("All rows are here: ");
-  console.log(req.body);
+  //console.log("All rows are here: ");
+  //console.log(req.body);
 
   for (let i = 0; i < req.body.length; i++) {
     if (i === 0) { continue; }
@@ -109,7 +130,78 @@ const sendConfirmationEmail = (excelRow) => {
       console.log(error);
       throw new Error("Could not send Confirmation email!");
     } else {
-      console.log("Notification email sent!");
+      console.log("Confirmation email sent!");
+    }
+  });
+};
+
+const requestPaymentEmail = (excelRow) => {
+  var mailOptions;
+  let sender = "SoC Social Night 2021 Payment";
+
+  let templatePath = path.join(
+    __dirname,
+    "..",
+    "views",
+    "payment-template.html"
+  );
+  const templateSource = fs.readFileSync(templatePath, "utf-8").toString();
+
+  const template = handlebars.compile(templateSource);
+  const replacements = {
+    ticketNumber: excelRow[0],
+    firstName: excelRow[1],
+    lastName: excelRow[2],
+    tableNumber: excelRow[4],
+    venue: excelRow[5],
+    paymentLink: 'ACTUAL PAYMENT LINK MUST BE HERE',                  //TODO: ADD THE ACTUAL LINK HERE
+  };
+  const htmlToSend = template(replacements);
+
+  var Transport = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    service: "Gmail",
+    auth: {
+      user: "SoCSocialNight2021@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  mailOptions = {
+    from: sender,
+    to: excelRow[3],
+    subject: "SoC Social Night 2021 Ticket Payment",
+    html: htmlToSend,
+    /*
+    attachments: [
+
+      {
+        filename: "concert-background.jpg",
+        path: path.join(
+          __dirname,
+          "..",
+          "views",
+          "concert-background.jpg"
+        ),
+        cid: "ConcertBackground",
+      },
+    ],
+    */
+  };
+  Transport.sendMail(mailOptions, (error, response) => {
+    if (error) {
+      console.log(
+        "Could not send Payment email!"
+      );
+      console.log(error);
+      throw new Error("Could not send Payment email!");
+    } else {
+      console.log("Payment email sent!");
     }
   });
 };

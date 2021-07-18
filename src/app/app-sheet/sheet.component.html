@@ -1,4 +1,18 @@
-<input type="file" (change)="onFileChange($event)" multiple="false" />
+
+
+<div class="container">
+
+  <div class="header">
+    <h1>Welcome.</h1>
+    <p>This website does not handle fringe cases because it is expected that the user <i>(a handful of people)</i> to be able to <b>follow the instructions as mentioned below</b>.</p>
+  </div>
+
+  <div class="input-selector-block">
+    <p class="file-select-locator"> <b>▽</b> choose your file HERE!!!!!</p>
+    <input type="file" (change)="onFileChange($event)" multiple="false" />
+    <p *ngIf="showExample"> Below is an example of how the layout should be in excel</p>
+  </div>
+
 	<table class="sjs-table">
 		<tbody>
       <tr *ngFor="let row of data">
@@ -8,6 +22,14 @@
 		</tr>
     </tbody>
 	</table>
+  <!--
 	<button (click)="export()">Export!</button>
-
+  -->
   <button (click)="sendConfirmationEmails()">Send Confirmation Email!</button>
+  <button (click)="sendPaymentRequestEmails()">Send Payment Request Email!</button>
+</div>
+
+<footer>
+  <p>If you enjoy this, do consider buying me a good cup of coffee from
+    <a href="https://arabica.coffee/en/locations/singapore/singapore/" target="_blank">% Arabica</a> ☕ (Cold Spanish Latte) please :')</p>
+</footer>

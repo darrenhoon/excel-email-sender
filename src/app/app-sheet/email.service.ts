@@ -26,4 +26,17 @@ export class EmailsService {
     });
   }
 
+  requestPayment(data: any[][]) {
+
+    //let dataToSend = JSON.stringify(data);
+
+    this.http
+    .post(BACKEND_URL + 'api/emails/requestPayment', data)
+    .subscribe(response => {
+      console.log("Finished requesting payment?");
+      console.log(response);
+    });
+  }
+
+
 }

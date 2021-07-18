@@ -11,12 +11,18 @@ const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 @Component({
   selector: 'app-sheet',
    templateUrl: './sheet.component.html',
+   styleUrls: ['./sheet.component.scss'],
 })
 
 export class SheetJSComponent {
-  data: AOA = [["Header1", "Header1"], ["Content", "Content"]];
+  data: AOA = [["TicketNumber", "First Name", "Last Name", "Email Address", "Table Number", "Location", "Paid? (yes/no)"],
+  ["121", "James", "Bond", "realJames@bond.com", "7", "Tembusu College", "yes"],
+  ["1", "Jeff", "Bezos", "jeff@amazon.com", "1", "Sheares Hall", null],
+  ];
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';
+  public showExample: boolean = true;
+  public warning: boolean = false;
 
   constructor(public emailsService: EmailsService) {}
 
@@ -37,6 +43,7 @@ export class SheetJSComponent {
       /* save data */
       this.data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
       console.log(this.data);
+      this.showExample = false;
     };
     reader.readAsBinaryString(target.files[0]);
   }
@@ -57,8 +64,19 @@ export class SheetJSComponent {
   sendConfirmationEmails() {
     //console.log(this.data);
 
+    console.log("I am going to assume the data is input correctly..");
+    this.showExample = false;
     this.emailsService.sendConfirmationEmail(this.data);
 
+
+
+  }
+
+  sendPaymentRequestEmails() {
+
+    console.log("I am going to assume the data is input correctly..");
+    this.showExample = false;
+    this.emailsService.requestPayment(this.data);
   }
 
 }
