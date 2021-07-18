@@ -17,7 +17,7 @@ const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 export class SheetJSComponent {
   data: AOA = [["TicketNumber", "First Name", "Last Name", "Email Address", "Table Number", "Location", "Paid? (yes/no)"],
   ["121", "James", "Bond", "realJames@bond.com", "7", "Tembusu College", "yes"],
-  ["1", "Jeff", "Bezos", "jeff@amazon.com", "1", "Sheares Hall", null],
+  ["1", "Jeff", "Bezos", "jeff@amazon.com", "1", "Sheares Hall", "no"],
   ];
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';

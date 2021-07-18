@@ -14,12 +14,12 @@ exports.requestPayment = (req, res, next) => {
 
     let data = req.body[i];
 
-    if (data[6] === "paid") {
+    if (data[6] === "yes") {
+      continue;
+    } else {
       console.log("This has not been approved yet:");
       console.log(data);
       requestPaymentEmail(data);
-    } else {
-      continue;
     }
   }
 
@@ -39,12 +39,12 @@ exports.sendConfirmation = (req, res, next) => {
 
     let data = req.body[i];
 
-    if (data[6]) {
-      continue;
-    } else {
+    if (data[6] === "yes") {
       console.log("This has not been approved yet:");
       console.log(data);
       sendConfirmationEmail(data);
+    } else {
+      continue;
     }
   }
 
@@ -154,7 +154,7 @@ const requestPaymentEmail = (excelRow) => {
     lastName: excelRow[2],
     tableNumber: excelRow[4],
     venue: excelRow[5],
-    paymentLink: 'ACTUAL PAYMENT LINK MUST BE HERE',                  //TODO: ADD THE ACTUAL LINK HERE
+    paymentLink: 'ACTUAL PAYMENT LINK MUST BE HERE',                  //TODO: ADD THE ACTUAL LINK HERE, NEED TO PUT INTO HTML TEMPLATE ACCORDINGLY
   };
   const htmlToSend = template(replacements);
 
