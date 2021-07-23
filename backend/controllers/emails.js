@@ -6,8 +6,10 @@ const path = require("path");
 
 exports.requestPayment = (req, res, next) => {
 
-  console.log("All rows are here: ");
-  console.log(req.body);
+  //console.log("All rows are here: ");
+  //console.log(req.body);
+
+  //let dataReceived = JSON.parse(req.body);
 
   for (let i = 0; i < req.body.length; i++) {
     if (i === 0) { continue; }
@@ -33,6 +35,7 @@ exports.sendConfirmation = (req, res, next) => {
 
   //console.log("All rows are here: ");
   //console.log(req.body);
+
 
   for (let i = 0; i < req.body.length; i++) {
     if (i === 0) { continue; }
@@ -90,7 +93,7 @@ const sendConfirmationEmail = (excelRow) => {
 
   var Transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
+    port: 465, //originally port 465
     secure: true,
     service: "Gmail",
     auth: {
@@ -154,13 +157,13 @@ const requestPaymentEmail = (excelRow) => {
     lastName: excelRow[2],
     tableNumber: excelRow[4],
     venue: excelRow[5],
-    paymentLink: 'ACTUAL PAYMENT LINK MUST BE HERE',                  //TODO: ADD THE ACTUAL LINK HERE, NEED TO PUT INTO HTML TEMPLATE ACCORDINGLY
+    paymentLink: 'www.google.com',                  //TODO: ADD THE ACTUAL LINK HERE, NEED TO PUT INTO HTML TEMPLATE ACCORDINGLY
   };
   const htmlToSend = template(replacements);
 
   var Transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
+    port: 465, //originally port 465
     secure: true,
     service: "Gmail",
     auth: {

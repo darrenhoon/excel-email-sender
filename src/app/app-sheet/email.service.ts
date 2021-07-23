@@ -28,6 +28,7 @@ export class EmailsService {
 
   requestPayment(data: any[][]) {
 
+    //console.log("Requesting Payment now!");
     //let dataToSend = JSON.stringify(data);
 
     this.http

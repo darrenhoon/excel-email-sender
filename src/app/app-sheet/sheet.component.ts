@@ -65,6 +65,7 @@ export class SheetJSComponent {
     //console.log(this.data);
 
     console.log("I am going to assume the data is input correctly..");
+    console.log(this.data);
     this.showExample = false;
     this.emailsService.sendConfirmationEmail(this.data);
 
@@ -75,6 +76,7 @@ export class SheetJSComponent {
   sendPaymentRequestEmails() {
 
     console.log("I am going to assume the data is input correctly..");
+    console.log(this.data);
     this.showExample = false;
     this.emailsService.requestPayment(this.data);
   }
