@@ -3,7 +3,7 @@
 <div class="container">
 
   <div class="header">
-    <h1>Welcome</h1>
+    <h1 class="cyberpunk">Welcome</h1>
     <p>This website does not handle fringe cases because it is expected that the user <i>(a handful of people)</i> would be able to <b>follow the instructions as mentioned below</b>.</p>
   </div>
 
@@ -28,10 +28,26 @@
 
   <!--
 	<button (click)="export()">Export!</button>
-  -->
+
+
   <button (click)="sendConfirmationEmails()">Send Confirmation Email!</button>
   <button (click)="sendPaymentRequestEmails()">Send Payment Request Email!</button>
+  -->
+
+  <div class="buttons-container">
+    <button class="cybr-btn" (click)="sendPaymentRequestEmails()">
+      Request Payment<span aria-hidden>_</span>
+      <span aria-hidden class="cybr-btn__glitch">Request Payment</span>
+      <span aria-hidden class="cybr-btn__tag">R25</span>
+    </button>
+    <button class="cybr-btn" (click)="sendConfirmationEmails()">
+      Send Confirmation<span aria-hidden>_</span>
+      <span aria-hidden class="cybr-btn__glitch">Send Confirmation_</span>
+      <span aria-hidden class="cybr-btn__tag">R25</span>
+    </button>
+  </div>
 </div>
+
 
 <footer>
   <p>If you enjoy this, do consider buying me a good cup of coffee from

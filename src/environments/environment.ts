@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://excel-email-sender.herokuapp.com/', // aHerokuLink or http://localhost:3000/
+  apiUrl: 'https://excel-email-sender.herokuapp.com/', // https://excel-email-sender.herokuapp.com/ or http://localhost:3000/
 };
 
 /*

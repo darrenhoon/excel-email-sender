@@ -17,7 +17,7 @@ const BACKEND_URL = environment.apiUrl; //change this in the environment folder
 export class SheetJSComponent {
   data: AOA = [["TicketNumber", "First Name", "Last Name", "Email Address", "Table Number", "Location", "Paid? (yes/no)"],
   ["121", "James", "Bond", "realJames@bond.com", "7", "Tembusu College", "yes"],
-  ["1", "Jeff", "Bezos", "jeff@amazon.com", "1", "Sheares Hall", "no"],
+  ["1", "Walter", "White", "walter@white.com", "1", "Sheares Hall", "no"],
   ];
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   fileName: string = 'SheetJS.xlsx';
@@ -42,7 +42,7 @@ export class SheetJSComponent {
 
       /* save data */
       this.data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
-      console.log(this.data);
+      //console.log(this.data);
       this.showExample = false;
     };
     reader.readAsBinaryString(target.files[0]);
@@ -62,11 +62,14 @@ export class SheetJSComponent {
   }
 
   sendConfirmationEmails() {
+    //console.log("I am going to assume the data is inputted correctly..");
     //console.log(this.data);
 
-    console.log("I am going to assume the data is input correctly..");
-    console.log(this.data);
-    this.showExample = false;
+    if (this.showExample) {
+      console.log("Please input your excel sheet")
+      return;
+    }
+
     this.emailsService.sendConfirmationEmail(this.data);
 
 
@@ -75,9 +78,14 @@ export class SheetJSComponent {
 
   sendPaymentRequestEmails() {
 
-    console.log("I am going to assume the data is input correctly..");
-    console.log(this.data);
-    this.showExample = false;
+    //console.log("I am going to assume the data is inputted correctly...");
+    //console.log(this.data);
+
+    if (this.showExample) {
+      console.log("Please input your excel sheet")
+      return;
+    }
+
     this.emailsService.requestPayment(this.data);
   }
 

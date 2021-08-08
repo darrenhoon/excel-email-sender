@@ -3,16 +3,16 @@ const handlebars = require("handlebars");
 const fs = require("fs");
 const path = require("path");
 
-
 exports.requestPayment = (req, res, next) => {
-
   //console.log("All rows are here: ");
   //console.log(req.body);
 
   //let dataReceived = JSON.parse(req.body);
 
   for (let i = 0; i < req.body.length; i++) {
-    if (i === 0) { continue; }
+    if (i === 0) {
+      continue;
+    }
 
     let data = req.body[i];
 
@@ -26,23 +26,22 @@ exports.requestPayment = (req, res, next) => {
   }
 
   res.status(201).json({
-        message: "confirmation emails sent successfully! Pending admin approval",
-      });
-
+    message: "payment request emails sent successfully!",
+  });
 };
 
 exports.sendConfirmation = (req, res, next) => {
-
   //console.log("All rows are here: ");
   //console.log(req.body);
 
-
   for (let i = 0; i < req.body.length; i++) {
-    if (i === 0) { continue; }
+    if (i === 0) {
+      continue;
+    }
 
     let data = req.body[i];
 
-    if (data[6] === "yes") {
+    if (data[6] === "yes" && data[7] === 'no') {
       console.log("This has not been approved yet:");
       console.log(data);
       sendConfirmationEmail(data);
@@ -52,16 +51,9 @@ exports.sendConfirmation = (req, res, next) => {
   }
 
   res.status(201).json({
-        message: "confirmation emails sent successfully! Pending admin approval",
-      });
+    message: "ticket confirmation emails sent successfully!",
+  });
 };
-
-
-
-
-
-
-
 
 /*
  * Emails with HTML Templating.
@@ -110,6 +102,8 @@ const sendConfirmationEmail = (excelRow) => {
     to: excelRow[3],
     subject: "SoC Social Night 2021 Attendance Confirmation",
     html: htmlToSend,
+
+    /*
     attachments: [
       {
         filename: "concert-background.jpg",
@@ -119,17 +113,15 @@ const sendConfirmationEmail = (excelRow) => {
           "views",
           "concert-background.jpg"
         ),
-        cid: "ConcertBackground",
+        cid: "concertBackground",
       },
     ],
-
+    */
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
-      console.log(
-        "Could not send Confirmation email!"
-      );
+      console.log("Could not send Confirmation email!");
       console.log(error);
       throw new Error("Could not send Confirmation email!");
     } else {
@@ -157,7 +149,7 @@ const requestPaymentEmail = (excelRow) => {
     lastName: excelRow[2],
     tableNumber: excelRow[4],
     venue: excelRow[5],
-    paymentLink: 'www.google.com',                  //TODO: ADD THE ACTUAL LINK HERE, NEED TO PUT INTO HTML TEMPLATE ACCORDINGLY
+    paymentLink: "www.google.com", //TODO: ADD THE ACTUAL LINK HERE, NEED TO PUT INTO HTML TEMPLATE ACCORDINGLY
   };
   const htmlToSend = template(replacements);
 
@@ -191,16 +183,14 @@ const requestPaymentEmail = (excelRow) => {
           "views",
           "concert-background.jpg"
         ),
-        cid: "ConcertBackground",
+        cid: "concertBackground",
       },
     ],
     */
   };
   Transport.sendMail(mailOptions, (error, response) => {
     if (error) {
-      console.log(
-        "Could not send Payment email!"
-      );
+      console.log("Could not send Payment email!");
       console.log(error);
       throw new Error("Could not send Payment email!");
     } else {

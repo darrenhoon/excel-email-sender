@@ -40,3 +40,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * npm install --save debug
 * npm install --save fs
 * npm install --save cors
+
+## Acknowlegements
+* Cyberpunk 2077 Theme from [gwannon](https://github.com/gwannon/Cyberpunk-2077-theme-css)
+* Cyberpunk 2077 Button from [Jhey](https://codepen.io/jh3y/pen/PoGbxLp)

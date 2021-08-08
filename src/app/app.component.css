@@ -1,11 +1,15 @@
+/*
 p {
   font-family: Lato;
 }
 
-table.sjs-table > tbody > tr:first-child > td {
-     background-color: lightgreen;
-}
+
 
 html {
   background-color: #f8f8ff;
+}
+*/
+
+table.sjs-table > tbody > tr:first-child > td {
+     background-color: lightgreen;
 }
