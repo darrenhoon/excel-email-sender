@@ -111,21 +111,6 @@ const sendConfirmationEmail = (excelRow) => {
     to: excelRow[3],
     subject: "SoC Social Night 2021 Attendance Confirmation",
     html: htmlToSend,
-
-    /*
-    attachments: [
-      {
-        filename: "concert-background.jpg",
-        path: path.join(
-          __dirname,
-          "..",
-          "views",
-          "concert-background.jpg"
-        ),
-        cid: "concertBackground",
-      },
-    ],
-    */
   };
 
   Transport.sendMail(mailOptions, (error, response) => {
