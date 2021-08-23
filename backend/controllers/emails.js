@@ -16,7 +16,11 @@ exports.requestPayment = (req, res, next) => {
 
     let data = req.body[i];
 
-    if (data[6] === "yes") {
+    if (data.length === 0) {
+      continue;
+    }
+
+    if (data[10] === "yes") {
       continue;
     } else {
       console.log("This has not been approved yet:");
@@ -27,6 +31,7 @@ exports.requestPayment = (req, res, next) => {
 
   res.status(201).json({
     message: "payment request emails sent successfully!",
+    studentData: req.body,
   });
 };
 
@@ -41,7 +46,11 @@ exports.sendConfirmation = (req, res, next) => {
 
     let data = req.body[i];
 
-    if (data[6] === "yes" && data[7] === 'no') {
+    if (data.length === 0) {
+      continue;
+    }
+
+    if (data[10] === "yes" && data[11] !== 'yes') {
       console.log("This has not been approved yet:");
       console.log(data);
       sendConfirmationEmail(data);
@@ -52,6 +61,7 @@ exports.sendConfirmation = (req, res, next) => {
 
   res.status(201).json({
     message: "ticket confirmation emails sent successfully!",
+    studentData: req.body,
   });
 };
 
@@ -75,11 +85,10 @@ const sendConfirmationEmail = (excelRow) => {
 
   const template = handlebars.compile(templateSource);
   const replacements = {
-    ticketNumber: excelRow[0],
-    firstName: excelRow[1],
-    lastName: excelRow[2],
-    tableNumber: excelRow[4],
-    venue: excelRow[5],
+    ticketNumber: excelRow[8],
+    fullName: excelRow[1],
+    tableNumber: excelRow[7],
+    venue: excelRow[9],
   };
   const htmlToSend = template(replacements);
 
@@ -125,7 +134,7 @@ const sendConfirmationEmail = (excelRow) => {
       console.log(error);
       throw new Error("Could not send Confirmation email!");
     } else {
-      console.log("Confirmation email sent!");
+      console.log("Confirmation email sent! Sent to: " + excelRow[3]);
     }
   });
 };
@@ -144,11 +153,10 @@ const requestPaymentEmail = (excelRow) => {
 
   const template = handlebars.compile(templateSource);
   const replacements = {
-    ticketNumber: excelRow[0],
-    firstName: excelRow[1],
-    lastName: excelRow[2],
-    tableNumber: excelRow[4],
-    venue: excelRow[5],
+    ticketNumber: excelRow[8],
+    fullName: excelRow[1],
+    tableNumber: excelRow[7],
+    venue: excelRow[9],
     paymentLink: "www.google.com", //TODO: ADD THE ACTUAL LINK HERE, NEED TO PUT INTO HTML TEMPLATE ACCORDINGLY
   };
   const htmlToSend = template(replacements);
@@ -194,7 +202,7 @@ const requestPaymentEmail = (excelRow) => {
       console.log(error);
       throw new Error("Could not send Payment email!");
     } else {
-      console.log("Payment email sent!");
+      console.log("Payment email sent! sent to: " + excelRow[3]);
     }
   });
 };
