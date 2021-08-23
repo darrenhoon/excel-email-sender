@@ -157,7 +157,8 @@ const requestPaymentEmail = (excelRow) => {
     fullName: excelRow[1],
     tableNumber: excelRow[7],
     venue: excelRow[9],
-    paymentLink: "www.google.com", //TODO: ADD THE ACTUAL LINK HERE, NEED TO PUT INTO HTML TEMPLATE ACCORDINGLY
+    paymentLink: "https://nusfastpay.nus.edu.sg/SOCSOCIALNIGHTTicket",
+    merchLink: "https://nusfastpay.nus.edu.sg/SOCSOCIALNIGHTMerch",
   };
   const htmlToSend = template(replacements);
 
